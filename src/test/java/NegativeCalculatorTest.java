@@ -15,8 +15,8 @@ public class NegativeCalculatorTest {
     }
 
     @Test(dataProvider = "negativeData", expectedExceptions = CalculatorException.class)
-    public void negativeTest(String op, String num1, String num2, String expected) {
-        assertEquals(Calculator.execute(new String[] {op, num1, num2}), expected);
+    public void negativeTest(String op, String num1, String num2) {
+        Calculator.execute(new String[]{op, num1, num2});
     }
 
 
