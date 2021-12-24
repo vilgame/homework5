@@ -3,6 +3,8 @@ import model.CalculatorException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
+
 public class NegativeCalculatorTest {
 
     @DataProvider(parallel = true)
@@ -13,8 +15,8 @@ public class NegativeCalculatorTest {
     }
 
     @Test(dataProvider = "negativeData", expectedExceptions = CalculatorException.class)
-    public void negativeTest(String op, String num1, String num2) {
-        new Calculator().sum(num1, num2);
+    public void negativeTest(String op, String num1, String num2, String expected) {
+        assertEquals(Calculator.execute(new String[] {op, num1, num2}), expected);
     }
 
 
