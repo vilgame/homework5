@@ -7,18 +7,10 @@ public class Calculator {
     public static String min = String.valueOf(Integer.MIN_VALUE);
 
     public static String execute(String[] params) {
-        String op = getOp();
-        params[0] = op;
         int num1 = Integer.parseInt(params[1]);
         int num2 = Integer.parseInt(params[2]);
-        int result = calc(num1, num2, op);
-        System.out.println("Result = " + result);
-        return String.valueOf(result);
-    }
-
-    public static int calc(int num1, int num2, String op) {
         int result;
-        switch (op) {
+        switch (params[0]) {
             case "+":
                 result = plus(num1, num2);
                 break;
@@ -32,9 +24,10 @@ public class Calculator {
                 result = div(num1, num2);
                 break;
             default:
-                throw new CalculatorException("Error invalid user");
+                throw new CalculatorException("Error! Invalid user!");
         }
-        return result;
+        System.out.println(num1 + params[0] + num2 + "=" + result);
+        return String.valueOf(result);
     }
 
     public static int getNum() {
@@ -59,13 +52,13 @@ public class Calculator {
         return op;
     }
 
-    public static boolean borders (int num) {
-        if (num >= Integer.MAX_VALUE || num <= Integer.MIN_VALUE) {
-            throw new CalculatorException("Borders");
-        } else {
-            return true;
-        }
-    }
+//    public static boolean borders (int num) {
+//        if (num >= Integer.MAX_VALUE || num <= Integer.MIN_VALUE) {
+//            throw new CalculatorException("Borders");
+//        } else {
+//            return true;
+//        }
+//    }
 
     public static int plus(int num1, int num2) {
         return num1 + num2;
@@ -80,7 +73,12 @@ public class Calculator {
     }
 
     public static int div(int num1, int num2) {
-        return num1 / num2;
+        if (num2 == 0) {
+            throw new CalculatorException("Division by 0");
+        }
+        else {
+            return num1 / num2;
+        }
     }
 
 }

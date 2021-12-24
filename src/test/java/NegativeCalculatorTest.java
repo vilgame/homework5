@@ -3,8 +3,6 @@ import model.CalculatorException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
 public class NegativeCalculatorTest {
 
     @DataProvider(parallel = true)
