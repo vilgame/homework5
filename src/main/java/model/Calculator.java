@@ -7,9 +7,16 @@ public class Calculator {
     public static String min = String.valueOf(Integer.MIN_VALUE);
 
     public static String execute(String[] params) {
-        int num1 = Integer.parseInt(params[1]);
-        int num2 = Integer.parseInt(params[2]);
+        int num1;
+        int num2;
         int result;
+        try {
+            num1 = Integer.parseInt(params[1]);
+            num2 = Integer.parseInt(params[2]);
+        }
+        catch (RuntimeException e) {
+            throw new CalculatorException("String not integer");
+        }
         switch (params[0]) {
             case "+":
                 result = plus(num1, num2);
@@ -26,8 +33,11 @@ public class Calculator {
             default:
                 throw new CalculatorException("Error! Invalid user!");
         }
+        borders(result);
         System.out.println(num1 + params[0] + num2 + "=" + result);
         return String.valueOf(result);
+
+
     }
 
     public static int getNum() {
@@ -52,13 +62,11 @@ public class Calculator {
         return op;
     }
 
-//    public static boolean borders (int num) {
-//        if (num >= Integer.MAX_VALUE || num <= Integer.MIN_VALUE) {
-//            throw new CalculatorException("Borders");
-//        } else {
-//            return true;
-//        }
-//    }
+    public static void borders(int num) {
+        if (num >= Integer.MAX_VALUE || num <= Integer.MIN_VALUE) {
+            throw new CalculatorException("Borders");
+        }
+    }
 
     public static int plus(int num1, int num2) {
         return num1 + num2;
