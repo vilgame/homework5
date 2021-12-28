@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Calculator {
@@ -9,7 +10,7 @@ public class Calculator {
     public static String execute(String[] params) {
         double num1;
         double num2;
-        double result;
+        String result;
         try {
             num1 = Double.parseDouble(params[1]);
             num2 = Double.parseDouble(params[2]);
@@ -33,19 +34,21 @@ public class Calculator {
             default:
                 throw new CalculatorException("Error! Invalid user!");
         }
-        borders(result);
-        String str = String.format("%.3f", result);
-        System.out.println(num1 + params[0] + num2 + "=" + str);
-        return String.valueOf(result);
+        borders(Double.parseDouble(result));
+        System.out.println(num1 + params[0] + num2 + "=" + result);
+        return result;
     }
 
-    public static double getNum() {
+    public static String getNum() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter a double: (for example: 1,1)");
-        double num;
+        System.out.println("Enter a double: (for example: 1.1)");
+        String num;
         if (in.hasNextDouble()) {
-            num = in.nextDouble();
-        } else {
+            double db = in.nextDouble();
+            num =  String.format(Locale.ENGLISH, "%.1f", db);
+            System.out.println(num);
+        }
+        else {
             num = getNum();
         }
         return num;
@@ -67,24 +70,24 @@ public class Calculator {
         }
     }
 
-    public static double plus(double num1, double num2) {
-        return num1 + num2;
+    public static String plus(double num1, double num2) {
+        return String.valueOf(num1 + num2);
     }
 
-    public static double minus(double num1, double num2) {
-        return num1 - num2;
+    public static String minus(double num1, double num2) {
+        return String.valueOf(num1 - num2);
     }
 
-    public static double mul(double num1, double num2) {
-        return num1 * num2;
+    public static String mul(double num1, double num2) {
+        return String.valueOf(num1 * num2);
     }
 
-    public static double div(double num1, double num2) {
+    public static String div(double num1, double num2) {
         if (num2 == 0) {
             throw new CalculatorException("Division by 0");
         }
         else {
-            return num1 / num2;
+            return String.format(Locale.ENGLISH,"%.3f", num1 / num2);
         }
     }
 
