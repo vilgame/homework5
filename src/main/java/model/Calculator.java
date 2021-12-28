@@ -7,15 +7,15 @@ public class Calculator {
     public static String min = String.valueOf(Integer.MIN_VALUE);
 
     public static String execute(String[] params) {
-        int num1;
-        int num2;
-        int result;
+        double num1;
+        double num2;
+        double result;
         try {
-            num1 = Integer.parseInt(params[1]);
-            num2 = Integer.parseInt(params[2]);
+            num1 = Double.parseDouble(params[1]);
+            num2 = Double.parseDouble(params[2]);
         }
         catch (RuntimeException e) {
-            throw new CalculatorException("String not integer");
+            throw new CalculatorException("String not double");
         }
         switch (params[0]) {
             case "+":
@@ -28,24 +28,23 @@ public class Calculator {
                 result = mul(num1, num2);
                 break;
             case "/":
-                result = div(num1, num2);
+                result =  div(num1, num2);
                 break;
             default:
                 throw new CalculatorException("Error! Invalid user!");
         }
         borders(result);
-        System.out.println(num1 + params[0] + num2 + "=" + result);
+        String str = String.format("%.3f", result);
+        System.out.println(num1 + params[0] + num2 + "=" + str);
         return String.valueOf(result);
-
-
     }
 
-    public static int getNum() {
+    public static double getNum() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter a integer:");
-        int num;
-        if (in.hasNextInt()) {
-            num = in.nextInt();
+        System.out.println("Enter a double: (for example: 1,1)");
+        double num;
+        if (in.hasNextDouble()) {
+            num = in.nextDouble();
         } else {
             num = getNum();
         }
@@ -62,25 +61,25 @@ public class Calculator {
         return op;
     }
 
-    public static void borders(int num) {
+    public static void borders(double num) {
         if (num >= Integer.MAX_VALUE || num <= Integer.MIN_VALUE) {
             throw new CalculatorException("Borders");
         }
     }
 
-    public static int plus(int num1, int num2) {
+    public static double plus(double num1, double num2) {
         return num1 + num2;
     }
 
-    public static int minus(int num1, int num2) {
+    public static double minus(double num1, double num2) {
         return num1 - num2;
     }
 
-    public static int mul(int num1, int num2) {
+    public static double mul(double num1, double num2) {
         return num1 * num2;
     }
 
-    public static int div(int num1, int num2) {
+    public static double div(double num1, double num2) {
         if (num2 == 0) {
             throw new CalculatorException("Division by 0");
         }
