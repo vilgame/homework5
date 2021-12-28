@@ -17,7 +17,8 @@ public class NegativeCalculatorTest {
                 {"/", "5", "0"},
                 {"w", "6", "-7"},
                 {"*", null, "8"},
-                {"+", max, "1"},
+                {"/", "9", ""},
+                {"+", "1", max},
                 {"-", min, "1"},
         };
     }
