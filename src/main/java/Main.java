@@ -10,7 +10,7 @@ public class Main {
         params[1] = in.nextLine();
         params[2] = in.nextLine();
         String str = Calculator.execute(params);
-        System.out.println(params[1] + params[0] + params[2] + "=" + str);
+        System.out.println(str);
     }
 }
 
